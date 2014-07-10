@@ -1,0 +1,13 @@
+Notes:
+
+The content of this repo reflects my private working with avr devices. As an Slackware user you can download and install compiler and libc from www.slackbuilds.org. I`m the maintainer of those packages. Feel free to ask for questions regarding it.
+
+My actual hw is a atmega168pa which is a quite nice device. For programming i use an old stk500 wich is connted with my pc via serial cable, but it also works fine with an serial<->usb cable. The libs in src reflect something like building blocks where i create some small hw components to be used in future projects. Within the next checkins you can find the schematics in schematics. 
+
+If you need some inspiration why to use bare metal devices instead of arduino, take a look at this really cool book -> http://makezine.com/2014/03/06/new-avr-programming-book-from-make/ ... Of course i have a copy of it on my desk :-)
+
+I also started playing with arm devices and also there's a book the starting point -> ARM Cortex-M3 Mikrocontroller: Einstieg und Praxis (mitp Professional) ... it's in german. So i added a compiler-switch for changing the devices. @HOME i have only one codebase for both and that switch decide what to build.
+
+
+Cheers
+  Thorsten 
