@@ -1,5 +1,5 @@
 /*
-  libavradc/libarmadc - simple library as a handle of adc stuff for small
+  libavrlcd/libarmlcd - simple library as a handle of lcd stuff for small
                         microcontroller(avr) and cortex-m3(arm) devices
  
   Copyright (C) 2014 Thorsten Johannvorderbrueggen <thorsten.johannvorderbrueggen@t-online.de>
@@ -19,48 +19,29 @@
   Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-#include "libavradc.h"
-#include "libavradc_priv.h"
+#include "libavrlcd.h"
+#include "libavrlcd_priv.h"
 
 
 /*
- * -> setup adc 
+ * -> setup lcd
  */
 void 
-adc_setup_adc(unsigned char adc_channel) 
+lcd_setup_display(void) 
 {
 
 /*
- * ADC SETUP FOR AVR
+ * LCD SETUP FOR AVR
  */
 #if CONTROLLER_FAMILY == __AVR__
 
 	/*
-	 * TODO: macros for all bit settings
+	 * TODO: fill me
 	 */
 
-	switch (adc_channel){
-	case ADC_CH0:
-		ADMUX |= (1 << REFS0);
-		ADCSRA |= (1 << ADPS2);
-		ADCSRA |= (1 << ADEN);
-			break;
-	case ADC_CH1:
-
-		/*
-		 * fill me
-		 */
-
-		break;
-	default: 
-		// ADC_CH0
-		ADMUX |= (1 << REFS0);  
-		ADCSRA |= (1 << ADPS2);
-		ADCSRA |= (1 << ADEN);
-#if ADC_ERROR == __ON__
-	adc_errno = ADC_INIT_DEFAULT;
+#if LCD_ERROR == __ON__
+	lcd_errno = LCD_INIT_DEFAULT;
 #endif
-		};                  
 	
 #endif  // AVR
 

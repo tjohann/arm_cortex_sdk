@@ -29,7 +29,7 @@
 
 
 /*
- * serial errno stuff
+ * adc errno stuff
  *
  * Note: of course not reentrant 
  *       ADC_ERROR is the general switch
@@ -41,7 +41,7 @@
 unsigned char adc_errno = MY_OK;
 #endif
 #else
-# warning "No special serial error indication!"
+# warning "No special adc error indication!"
 #endif
 
 /*

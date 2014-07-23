@@ -8,7 +8,7 @@
 CONTROLLER_FAMILY = __AVR__
 
 
-# use adc_errno to indicate serial specific erros
+# use adc_errno to indicate adc specific erros
 # -> ON  (use it)
 # -> OFF (no i can do it better)
 ADC_ERROR = __ON__
@@ -18,6 +18,10 @@ ADC_ERROR = __ON__
 # -> ON  (use it)
 # -> OFF (no i can do it better)
 SERIAL_ERROR = __ON__
+# use lcd_errno to indicate lcd specific erros
+# -> ON  (use it)
+# -> OFF (no i can do it better)
+LCD_ERROR = __ON__
 
 
 # led port for cylcon eyes

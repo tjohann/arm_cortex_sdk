@@ -10,7 +10,7 @@ include $(PROJECT_CONTROLLER)
 
 # target + source file (NOTE: only one src file)
 TARGET = template
-USED_LIBS = avrhelper -lavrserial -lavradc -lavrcyclon
+USED_LIBS = avrhelper -lavrserial -lavradc -lavrlcd -lavrcyclon 
 SRC = template.c
 HEADER = template.h
 
@@ -29,7 +29,7 @@ HEADER = template.h
 #
 CONTROLLER = -mmcu=$(MCU) -DF_CPU=$(F_CPU)UL
 OPT_FLAGS = -Os
-COMPILER_SWITCHES = -DCONTROLLER_FAMILY=$(CONTROLLER_FAMILY) -DSERIAL_ERROR=$(SERIAL_ERROR) -DADC_ERROR=$(ADC_ERROR)
+COMPILER_SWITCHES = -DCONTROLLER_FAMILY=$(CONTROLLER_FAMILY) -DSERIAL_ERROR=$(SERIAL_ERROR) -DADC_ERROR=$(ADC_ERROR) -DLCD_ERROR=$(LCD_ERROR) -DCOMMUNICATION_PATH=$(COMMUNICATION_PATH)
 
 #
 # common fuses in $(AVR_HOME)/include/defines_m168p.mk

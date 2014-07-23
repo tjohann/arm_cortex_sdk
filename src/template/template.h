@@ -31,8 +31,14 @@
 #include <libavrhelper.h>
 #include <libavrserial.h>
 #include <libavradc.h>
+#include <libavrlcd.h>
 #include <libavrcyclon.h>
 
+
+// make shure that COMMUNICATION_PATH is available
+#ifndef COMMUNICATION_PATH
+#error "COMMUNICATION_PATH not defined"
+#endif
 
 /*
  * -> use serial_errno
@@ -45,6 +51,11 @@ extern unsigned char serial_errno;
  */
 extern unsigned char adc_errno;
 
+
+/*
+ * -> use lcd_errno
+ */
+extern unsigned char lcd_errno;
 
 
 /*

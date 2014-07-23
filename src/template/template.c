@@ -41,8 +41,9 @@
 #define STATE_UNKNOWN 0x00
 #define STATE_OK 0x01
 #define STATE_ERROR 0x02
-#define STATE_SERIAL_INIT_DONE 0x03
-#define STATE_INIT_DONE 0x04
+#define STATE_SERIAL_INIT_DONE 0x04
+#define STATE_LCD_INIT_DONE 0x08
+#define STATE_INIT_DONE 0x10
 
 // my common state info
 unsigned char state_of_template = STATE_UNKNOWN;
@@ -66,9 +67,13 @@ void
 error_indication(const unsigned char *error_string,
 		 const unsigned char size) 
 {
-	if (state_of_template >= STATE_SERIAL_INIT_DONE) {
-		serial_send_string(error_string, size); 
-		
+#if COMMUNICATION_PATH == __SERIAL__
+	if (state_of_template & STATE_SERIAL_INIT_DONE) {
+		serial_send_string(error_string, size); 	
+#elif COMMUNICATION_PATH == __LCD__
+			if (state_of_template & STATE_LCD_INIT_DONE) {
+			//lcd_set_string(error_string, size); 
+#endif
 	} else {
 		while (1) {
 			SET_BIT(LED_PORT, LED_PIN);
@@ -89,8 +94,10 @@ __attribute__((OS_main)) main(void)
 	const unsigned char greeting_string[] = "hello ... i'm an atmega168(pa)\n\r";
 	const unsigned char error_string[] = "an error occured ... pls check\n\r";
 
+#if COMMUNICATION_PATH == __SERIAL__
 	unsigned char *string = NULL;
 	unsigned char byte = 0x31;
+#endif
 
 	/*
 	 * ---------- cyclon stuff ----------
@@ -104,33 +111,50 @@ __attribute__((OS_main)) main(void)
 
 	/*
 	 * ---------- serial stuff ----------
+	 *
+	 * Note: dont use serial & lcd -> PIN conflict 
 	 */
+#if COMMUNICATION_PATH == __SERIAL__
 	// init serial and let the led blink with DELAYTIME_ON_ERROR ms
 	serial_setup_async_normal_mode(DATA_8_STOP_1_NO_PARITY);
 	if (serial_errno != MY_OK)
 		error_indication(error_string, sizeof(error_string));
 	
 	// init serial done ... send greetings to peer
-	state_of_template = STATE_SERIAL_INIT_DONE;
+	state_of_template |= STATE_SERIAL_INIT_DONE;
 	serial_send_string(greeting_string, sizeof(greeting_string));
 
 	// get an char from peer and send it as ascii 
 	byte = serial_receive_byte();
 	serial_send_byte(byte, SERIAL_SEND_ASCII);	
-
-	/*
-	 * Note: untested functions of libavrserial are below ...
-	 *       tested are above this comment
-	 * Date: 06.07.2014
-	 */
-	//string = serial_receive_string(4);
-	//serial_send_string(string, 2);	
-	// -->  END of untested serial stuff
+#endif
 
 	/*
 	 * ---------- adc stuff ----------
 	 */
-	adc_setup_adc();
+	adc_setup_adc(ADC_CH0);
+	// only temporary for learning
+	ADCSRA |= (1 << ADSC);
+	loop_until_bit_is_clear(ADCSRA, ADSC);
+	uint16_t adcValue;
+	adcValue = ADC;
+	serial_send_byte((adcValue >> 3), SERIAL_SEND_NORMAL);
+	
+
+	/*
+	 * ---------- lcd stuff ----------
+	 *
+	 * Note: dont use serial & lcd -> PIN conflict 
+	 */
+#if COMMUNICATION_PATH == __LCD__
+	lcd_setup_display();
+	if (lcd_errno != MY_OK)
+		error_indication(error_string, sizeof(error_string));
+
+	// init lcd done ... send greetings to peer
+	state_of_template |= STATE_LCD_INIT_DONE;
+	//lcd_set_string(greeting_string, sizeof(greeting_string));
+#endif      
 
 	/*
 	 * ---------- init template stuff ----------

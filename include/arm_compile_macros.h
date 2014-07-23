@@ -55,5 +55,15 @@
 #define __PORT_D__ 4
 #endif
 
+/*
+ * defines for COMMUNICATION_PATH 
+ */
+#ifndef __SERIAL__
+#define __SERIAL__ 1
+#endif
+
+#ifndef __LCD__
+#define __LCD__ 2
+#endif
 
 #endif

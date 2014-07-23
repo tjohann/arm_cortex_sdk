@@ -1,5 +1,5 @@
 /*
-  libavradc/libarmadc - simple library as a handle of adc stuff for small
+  libavrlcd/libarmlcd - simple library as a handle of lcd stuff for small
                         microcontroller(avr) and cortex-m3(arm) devices
  
   Copyright (C) 2014 Thorsten Johannvorderbrueggen <thorsten.johannvorderbrueggen@t-online.de>
@@ -19,58 +19,41 @@
   Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-#include "libavradc.h"
-#include "libavradc_priv.h"
+#ifndef _LIBAVRLCD_PRIV_H_
+#define _LIBAVRLCD_PRIV_H_
+
+#include <libavrhelper.h>
+#include "libavrlcd.h"
+#include <avr/io.h>
+#include <stdlib.h>
 
 
 /*
- * -> setup adc 
+ * lcd errno stuff
+ *
+ * Note: of course not reentrant 
+ *       LCD_ERROR is the general switch
+ *       LCD_ERRNO for adc_errno which holds lcd_error_t values 
  */
-void 
-adc_setup_adc(unsigned char adc_channel) 
-{
-
-/*
- * ADC SETUP FOR AVR
- */
-#if CONTROLLER_FAMILY == __AVR__
-
-	/*
-	 * TODO: macros for all bit settings
-	 */
-
-	switch (adc_channel){
-	case ADC_CH0:
-		ADMUX |= (1 << REFS0);
-		ADCSRA |= (1 << ADPS2);
-		ADCSRA |= (1 << ADEN);
-			break;
-	case ADC_CH1:
-
-		/*
-		 * fill me
-		 */
-
-		break;
-	default: 
-		// ADC_CH0
-		ADMUX |= (1 << REFS0);  
-		ADCSRA |= (1 << ADPS2);
-		ADCSRA |= (1 << ADEN);
-#if ADC_ERROR == __ON__
-	adc_errno = ADC_INIT_DEFAULT;
+#ifdef LCD_ERROR 
+#ifndef LCD_ERRNO
+#define LCD_ERRNO
+unsigned char lcd_errno = MY_OK;
 #endif
-		};                  
-	
-#endif  // AVR
-
+#else
+# warning "No special lcd error indication!"
+#endif
 
 /*
- * ADC SETUP FOR ARM-CORTEX-M3
+ * error string 
  */
-#if CONTROLLER_FAMILY == __ARM__
-	// fill me
-#endif  // ARM
+unsigned char *lcd_error_string = (unsigned char *) "LCD_ERROR";
 
-}
+/*
+ * -> macros for setting ....
+ */
 
+
+
+
+#endif
