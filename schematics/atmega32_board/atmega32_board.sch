@@ -1,4 +1,4 @@
-EESchema Schematic File Version 2  date Di 22 Jul 2014 16:01:04 CEST
+EESchema Schematic File Version 2
 LIBS:power
 LIBS:device
 LIBS:transistors
@@ -30,13 +30,13 @@ LIBS:atmel
 LIBS:contrib
 LIBS:valves
 LIBS:atmega32_board-cache
-EELAYER 25  0
+EELAYER 27 0
 EELAYER END
-$Descr A4 11700 8267
+$Descr A4 11693 8268
 encoding utf-8
 Sheet 1 1
 Title ""
-Date "22 jul 2014"
+Date "23 jul 2014"
 Rev ""
 Comp ""
 Comment1 ""
@@ -45,22 +45,14 @@ Comment3 ""
 Comment4 ""
 $EndDescr
 $Comp
-L +5V #PWR?
-U 1 1 53CE6E84
-P 900 1300
-F 0 "#PWR?" H 900 1390 20  0001 C CNN
-F 1 "+5V" H 900 1390 30  0000 C CNN
-	1    900  1300
-	1    0    0    -1  
-$EndComp
-$Comp
-L ATMEGA32-A IC?
-U 1 1 53CE6CE8
-P 2850 3850
-F 0 "IC?" H 2050 5680 50  0000 L BNN
-F 1 "ATMEGA32-A" H 3100 1950 50  0000 L BNN
-F 2 "TQFP44" H 3350 1875 50  0001 C CNN
-	1    2850 3850
+L ATMEGA32-P IC1
+U 1 1 53CF7D74
+P 2950 4700
+F 0 "IC1" H 2100 6580 40  0000 L BNN
+F 1 "ATMEGA32-P" H 3400 2750 40  0000 L BNN
+F 2 "DIL40" H 2950 4700 30  0000 C CIN
+F 3 "" H 2950 4700 60  0000 C CNN
+	1    2950 4700
 	1    0    0    -1  
 $EndComp
 $EndSCHEMATC

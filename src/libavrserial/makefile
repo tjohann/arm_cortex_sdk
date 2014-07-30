@@ -24,7 +24,7 @@ HEADER = libavrserial.h
 #
 CONTROLLER = -mmcu=$(MCU) -DF_CPU=$(F_CPU)UL -DBAUD=$(BAUD)UL 
 OPT_FLAGS = -Os
-COMPILER_SWITCHES = -DCONTROLLER_FAMILY=$(CONTROLLER_FAMILY) -DSERIAL_ERROR=$(SERIAL_ERROR)
+COMPILER_SWITCHES = -DCONTROLLER_FAMILY=$(CONTROLLER_FAMILY) -DUSE_SERIAL=$(USE_SERIAL) -DSERIAL_ERROR=$(SERIAL_ERROR)
 
 #
 # ---------  BUILD all in a single step ----------
@@ -54,9 +54,4 @@ install: $(TARGET).a
 #
 clean:
 	rm -rf *~ *.a *.i *.s *.elf *.hex *.bin *.srec *.obj *.o *.eeprom *.lst *.map core.d
-
-
-
-
-
 

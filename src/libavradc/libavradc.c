@@ -24,6 +24,11 @@
 
 
 /*
+ * if you want to use ADC ... otherwise no code to to link
+ */
+#if USE_ADC == __YES__
+
+/*
  * -> setup adc 
  */
 void 
@@ -74,3 +79,6 @@ adc_setup_adc(unsigned char adc_channel)
 
 }
 
+#else
+# warning "USE_ADC == __NO__ -> dont try to use the functions "
+#endif

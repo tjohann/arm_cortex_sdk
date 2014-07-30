@@ -3,8 +3,8 @@ Some infos regarding tested configs:
 Tested with:    
 
 1). 
- *  MCU=atmega168p 
- *  F_CPU=1000000 
+ *  MCU=atmega32 
+ *  F_CPU=16000000 
 
 
 2).

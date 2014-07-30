@@ -23,12 +23,23 @@
 #define _LIBAVRLCD_H_
 
 #include <avr_compile_macros.h>
-#include <libavrhelper.h>
 
 
 #ifndef F_CPU
 #  error "Freq of CPU not defined!"
 #endif
+
+
+/*
+ * LCD pinnig 
+ *
+ * Note: - only 8 bit mode 
+ *       - RS <-> PC2
+ *       - EN <-> PC3
+ *       - RW <-> t.b.d.
+ *
+ *       see $(AVR_HOME)/include/avr_defines_display.h for more info
+ */
 
 
 /*
@@ -72,11 +83,50 @@ typedef enum lcd_errors {
  */
 
 /*
- * -> setup lcd
+ * -> setup lcd 
+ *
+ * Note: includes call lcd_reset_lcd()
+ *       =====
+ *       Config: - 8 bit mode
+ *               - 2 logical lines 
+ *               - 5x7 fonts
+ *               - blinking cursor with
+ *               - underline
+ *               - cursor auto increment
  */
 void 
 lcd_setup_display(void);
 
+
+/*
+ * -> reset lcd  
+ *
+ * Note: see lcd_setup_display for init values
+ */
+void
+lcd_reset_lcd(void);
+
+/*
+ * ----------- functions to send commands to the LCD ---------
+ */
+
+/*
+ * -> send a command to the lcd
+ */
+void 
+lcd_send_command(unsigned char cmd);
+
+
+
+/*
+ * ----------- functions to send character to the LCD --------
+ */
+
+/*
+ * -> send a character to the lcd
+ */
+void 
+lcd_send_character(unsigned char cmd);
 
 
 #endif

@@ -24,6 +24,11 @@
 
 
 /*
+ * if you want to use CYCLON ... otherwise no code to to link
+ */
+#if USE_CYCLON == __YES__
+
+/*
  * -> do some init stuff 
  */
 void
@@ -114,3 +119,7 @@ cyclon_double_run(const unsigned short count,
 
 	} while (act_count != count);
 }
+
+#else
+# warning "USE_CYCLON == __NO__ -> dont try to use the functions "
+#endif

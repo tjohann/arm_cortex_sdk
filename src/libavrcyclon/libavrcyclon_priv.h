@@ -30,11 +30,7 @@
 #include <util/delay.h> 
 
 
-#ifndef CYCLON_PORT
-#  error "CYCLON_PORT not defined!"
-#endif
-
-
+#if USE_CYCLON == __YES__
 #if CYCLON_PORT == __PORT_A__
 #define LEDS_PORT PORTA
 #ifdef DDRA
@@ -53,6 +49,7 @@
 #define LEDS_DDR DDRD
 #else
 # error "CYCLON_PORT not valid"
+#endif
 #endif
 
 

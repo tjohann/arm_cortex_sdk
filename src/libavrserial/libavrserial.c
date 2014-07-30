@@ -24,6 +24,11 @@
 
 
 /*
+ * if you want to use SERIAL ... otherwise no code to to link
+ */
+#if USE_SERIAL == __YES__
+
+/*
  * -> setup USART0 for async mode at normal speed ... U2Xn=0
  */
 void 
@@ -69,7 +74,6 @@ serial_setup_sync_slave(serial_frame_type_t frame_type)
 }
 
 
-
 /*
  * ************** private functions **************
  */
@@ -82,6 +86,7 @@ serial_setup_usart(serial_op_mode_t op_mode,
 		   serial_frame_type_t frame_type,
 		   serial_enable_rxtx_t ena_rxtx) 
 {
+
 
 /*
  * SERIAL SETUP FOR AVR
@@ -107,7 +112,7 @@ serial_setup_usart(serial_op_mode_t op_mode,
 /*
  * Note: USE_2X handles the need of double speed or not (util_setbaud helper)
  *       see http://www.mikrocontroller.net/articles/AVR-GCC-Tutorial/Der_UART for
- *       more informations (sry only in german)
+ *       more information (sry only in german)
  */
  
 #if USE_2X
@@ -445,4 +450,8 @@ serial_receive_string(unsigned char size)
 
 	return data;
 }
+
+#else
+# warning "USE_SERIAL == __NO__ -> dont try to use the functions "
+#endif
 

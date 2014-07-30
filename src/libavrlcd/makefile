@@ -17,14 +17,14 @@ HEADER = libavrlcd.h
 #
 # common controller defines 
 #
-# -> see my_m168p_env
+# -> see my_*
 
 #
 # common CFLAGS in $(AVR_HOME)/include/defines.mk
 #
-CONTROLLER = -mmcu=$(MCU) -DF_CPU=$(F_CPU)UL -DBAUD=$(BAUD)UL 
+CONTROLLER = -mmcu=$(MCU) -DF_CPU=$(F_CPU)UL 
 OPT_FLAGS = -Os
-COMPILER_SWITCHES = -DCONTROLLER_FAMILY=$(CONTROLLER_FAMILY) -DLCD_ERROR=$(LCD_ERROR)
+COMPILER_SWITCHES = -DCONTROLLER_FAMILY=$(CONTROLLER_FAMILY) -DUSE_LCD=$(USE_LCD) -DLCD_ERROR=$(LCD_ERROR) -DLCD_COMMON_PORT=$(LCD_COMMON_PORT)
 
 #
 # ---------  BUILD all in a single step ----------

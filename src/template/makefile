@@ -17,26 +17,26 @@ HEADER = template.h
 #
 # common controller defines 
 #
-# -> see my_m168p_env
+# -> see my_m*_env
 
 #
 # my programmer -> a old stk500 on usb<->serial adapter
 #
-# -> see my_m168p_env
+# -> see my_m*_env
 
 #
 # common CFLAGS in $(AVR_HOME)/include/defines.mk
 #
 CONTROLLER = -mmcu=$(MCU) -DF_CPU=$(F_CPU)UL
 OPT_FLAGS = -Os
-COMPILER_SWITCHES = -DCONTROLLER_FAMILY=$(CONTROLLER_FAMILY) -DSERIAL_ERROR=$(SERIAL_ERROR) -DADC_ERROR=$(ADC_ERROR) -DLCD_ERROR=$(LCD_ERROR) -DCOMMUNICATION_PATH=$(COMMUNICATION_PATH)
+COMPILER_SWITCHES = -DCONTROLLER_FAMILY=$(CONTROLLER_FAMILY) 
+COMPILER_SWITCHES += -DUSE_SERIAL=$(USE_SERIAL) -DUSE_CYCLON=$(USE_CYCLON) -DUSE_LCD=$(USE_LCD) -DUSE_ADC=$(USE_ADC) 
+COMPILER_SWITCHES += -DSERIAL_ERROR=$(SERIAL_ERROR) -DADC_ERROR=$(ADC_ERROR) -DLCD_ERROR=$(LCD_ERROR) 
+COMPILER_SWITCHES += -DCOMMUNICATION_PATH=$(COMMUNICATION_PATH) 
 
 #
-# common fuses in $(AVR_HOME)/include/defines_m168p.mk
+# common fuses in $(AVR_HOME)/include/defines_m*.mk
 #
-# to add some useful changes set the below values
-# full-speed-mode -> CLDIV8 = 1 -> LFUSE = 0xE2 
-# preserve eeprom across flashing -> HFUSE = 0xD7
 export FUSE_STRING = -U lfuse:w:${LFUSE}:m -U hfuse:w:${HFUSE}:m -U efuse:w:${EFUSE}:m
 
 #

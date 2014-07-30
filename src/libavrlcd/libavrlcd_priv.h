@@ -27,6 +27,10 @@
 #include <avr/io.h>
 #include <stdlib.h>
 
+#define __DELAY_BACKWARD_COMPATIBLE__
+#include <util/delay.h>
+
+#include <avr_defines_display.h>
 
 /*
  * lcd errno stuff
@@ -49,10 +53,37 @@ unsigned char lcd_errno = MY_OK;
  */
 unsigned char *lcd_error_string = (unsigned char *) "LCD_ERROR";
 
+
+/*
+ * LCD timing 
+ */
+#define LCD_BOOTUP_TIME 100
+#define LCD_ENABLE_PAUSE 100
+#define LCD_INIT_LONG 5
+#define LCD_INIT_SHORT 200
+
+
 /*
  * -> macros for setting ....
  */
+#define LCD_PUSH_EN_BUTTON() {				\
+		LCD_CTRL_PORT |= (1 << LCD_EN_PIN);	\
+		_delay_us(LCD_ENABLE_PAUSE);		\
+		LCD_CTRL_PORT &= ~(1 << LCD_EN_PIN);	\
+		_delay_us(LCD_ENABLE_PAUSE);		\
+	}
 
+
+/*
+ * ----------- functions for init/setup of the LCD -----------
+ */
+
+
+/*
+ * -> reset lcd  
+ */
+void
+lcd_reset_lcd(void);
 
 
 
