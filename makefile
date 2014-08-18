@@ -2,8 +2,8 @@ main = none
 
 #include include/defines.mk
 
-MODULES = src
-MODULES_ADDITIONAL = include lib man bin etc docs schematics
+MODULES = src 
+MODULES_ADDITIONAL = include lib man bin etc docs schematics projects
 
 all::
 	@echo "+-----------------------------------------------+"

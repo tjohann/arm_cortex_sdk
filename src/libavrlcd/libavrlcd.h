@@ -46,10 +46,21 @@
  * lcd specific error codes
  */
 typedef enum lcd_errors {
-	LCD_INIT_DEFAULT = 0x00, 
+	LCD_SET_CURSOR_DEFAULT = 0x00, 
+	LCD_LINE_OVERFLOW,
 	LCD_UNKNOWN
 } lcd_errors_t;
 
+
+/*
+ * lcd lines
+ */
+typedef enum lcd_lines {
+	LCD_LINE_1 = 0x00, 
+	LCD_LINE_2,
+	LCD_LINE_3,
+	LCD_LINE_4
+} lcd_lines_t;
 
 
 /*
@@ -111,11 +122,45 @@ lcd_reset_lcd(void);
  */
 
 /*
- * -> send a command to the lcd
+ *  -> clear display
  */
-void 
-lcd_send_command(unsigned char cmd);
+void lcd_clear_display();
 
+
+/*
+ *  -> set cursor to home position
+ */
+void lcd_set_cursor_to_home_pos();
+
+
+/*
+ *  -> set cursor to position
+ */
+void lcd_set_cursor(unsigned char x, lcd_lines_t line);
+
+
+/*
+ *  -> turn the display off
+ */
+void lcd_set_display_off();
+
+
+/*
+ *  -> turn the display on
+ */
+void lcd_set_display_on();
+
+
+/*
+ *  -> set cursor off
+ */
+void lcd_set_cursor_off();
+
+
+/*
+ *  -> set cursor off
+ */
+void lcd_set_cursor_on();
 
 
 /*
@@ -126,7 +171,16 @@ lcd_send_command(unsigned char cmd);
  * -> send a character to the lcd
  */
 void 
-lcd_send_character(unsigned char cmd);
+lcd_send_character(unsigned char data);
 
+
+/*
+ * -> send a string to the lcd
+ *
+ * Note: if a line is longer than LCD_NUMBER_OF_ROWS, then
+ *       lcd_errno is set to LCD_LINE_OVERFLOW
+ */
+void 
+lcd_send_string(const unsigned char *data);
 
 #endif

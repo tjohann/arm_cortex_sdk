@@ -1,0 +1,46 @@
+# HOWTO
+
+This is a small howto for my avr_sdk. Make shure that you already read README, NOTES and FEATURE_OVERVIEW.
+
+For this sdk i use 2 different controller, first an atmega168(pa) and second an atmega32. So the 2 env files (my_m168p_env and my_m32_env) reflect my basic configuration for them. Within those files i configure the features of my target through simple macros (see FEATURE_OVERVIEW) like USE_LCD=__YES__. These macros are used in src/* and special in src/template.*. 
+
+So the first step you have to do is to decide which controller you want to use:
+
+-> source the files:
+
+atmega168(pa) -> ~/avr_sdk$ . ./my_m168pa_env
+
+or
+
+atmega32 -> ~/avr_sdk$ . ./my_m32_env
+
+After then you have set all possible switches to __YES__ for that controller. Next step is to build all libs under src/libavr*. To do so type 
+
+~/avr_sdk$ make 
+
+That build and install the libs in ~/avr_sdk/lib and it also build the template project. Depending on your sourced env file you have lcd or not and serial ... in src/template is the resulting elf/hex file(s). If you have the same programming hw and same hw config, then you can also flash it via 
+
+~/avr_sdk$ make flash 
+
+If not, then you should adapt the env file to fit your hw. The template project is my testing routine for the most features. So you can see there how i think a feature should be used. 
+
+For "real" projects go to the project dir. There you find my projects. At the moment the 3 dirs reflect the 3 different hw needed for my fan/case/ctrl project. See the README in there for more information. Note that there also 3 different env files! Because the hw are different so i need those 3 env files. The idea behind that is quite simple. First install the maximal possible libs activated via my_m*_env for a controller and then build the different projects. Also note that the controller are not the same throught the 3 projects! So first build them for one my_m*_env file corresponding project(s), then rebuild the libs and build the rest project(s). 
+
+Thats all :-) 
+
+Enjoy 
+  Thorsten
+
+----------------
+
+Some more notes:
+
+- in schematics you can/will find the corresponding schematics of the projects and the test hw (src/template)
+- all content here is not stable and could/would change during the next weeks or months. If i think there stable, then i will release an official version on sourceforge.net
+- i use slackware and the packages of slackbuilds.org which i maintain
+- i started a corresponding arm-cortex-m3 project/repo that will share code
+- i will start a corresponding linux project which would provide some daemon and kernel driver for the hw projects (both, avr and arm based) 
+- there will also be a blog for it (start with it in the next days ... link will follow)
+
+
+#EOF

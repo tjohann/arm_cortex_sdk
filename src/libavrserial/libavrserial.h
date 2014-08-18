@@ -210,7 +210,6 @@ serial_send_byte(const unsigned char byte,
  * serial_errno: no usage 
  */
 void 
-serial_send_string(const unsigned char *data_string, 
-		   const unsigned char size); 
+serial_send_string(const unsigned char *data); 
 
 #endif

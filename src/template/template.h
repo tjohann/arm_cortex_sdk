@@ -23,6 +23,7 @@
 
 #define __DELAY_BACKWARD_COMPATIBLE__
 #include <util/delay.h>
+#include <string.h>
 
 /*
  * -> my avr_sdk libs 

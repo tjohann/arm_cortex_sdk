@@ -1,6 +1,6 @@
 # only for cleaning :-)
 
-SUBDIRS = atmega32_board
+SUBDIRS = 
 
 .PHONY: all
 all: 
@@ -8,7 +8,7 @@ all:
 
 .PHONY: clean
 clean:
-	rm -f *~ *.o 
+	rm -f *~ *.o *.bak *-bak
 	for dir in $(SUBDIRS); do (cd $$dir && $(MAKE) $@); done	
 
 

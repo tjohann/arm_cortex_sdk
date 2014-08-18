@@ -23,12 +23,26 @@
 
 
 /*
- * -> dummy function
+ * -> convert usigned short data to data_string
  */
-void 
-helper_dummy(void)
+void
+helper_convert_ushort_to_string(unsigned char data_string[], unsigned short data)
 {
+	data_string[4] = 0x30 + (data % 10);
+	data_string[3] = 0x30 + ((data / 10) % 10);
+	data_string[2] = 0x30 + ((data / 100) % 10);
+	data_string[1] = 0x30 + ((data / 1000) % 10);
+	data_string[0] = 0x30 + (data / 10000);
+}
 
-	// do something
 
+/*
+ * -> convert usigned char data to data_string
+ */
+void
+helper_convert_uchar_to_string(unsigned char data_string[], unsigned char data)
+{
+	data_string[2] = 0x30 + (data % 10);
+	data_string[1] = 0x30 + ((data / 10) % 10); 
+	data_string[0] = 0x30 + (data / 100);
 }

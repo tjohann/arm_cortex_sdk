@@ -61,11 +61,20 @@
 	(_SFR_BYTE(sfr) ^= (1 << bit))		
 #endif
 
+
+
 /*
- * -> dummy function
+ * -> convert usigned short data to data_string
  */
-void 
-helper_dummy(void);
+void
+helper_convert_ushort_to_string(unsigned char data_string[], unsigned short data);
+
+
+/*
+ * -> convert usigned char data to data_string
+ */
+void
+helper_convert_uchar_to_string(unsigned char data_string[], unsigned char data);
 
 
 #endif

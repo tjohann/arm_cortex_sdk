@@ -304,14 +304,10 @@ serial_send_byte(const unsigned char byte,
  * -> send string (polling)
  */
 void 
-serial_send_string(const unsigned char *data_string, 
-		   const unsigned char size) 
+serial_send_string(const unsigned char *data) 
 {
-	unsigned char i = 0;
-
-	// dont send nil 
-	for(i = 0; i < (size - 1); i++)
-		serial_send_byte(data_string[i], SERIAL_SEND_NORMAL);
+	while(*data != '\0')
+		serial_send_byte(*data++, SERIAL_SEND_NORMAL);
 }
 
 

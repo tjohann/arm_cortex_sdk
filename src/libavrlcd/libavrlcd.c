@@ -103,19 +103,17 @@ lcd_setup_display(void)
 	 */
 	LCD_PORT = 0x38;
 	LCD_PUSH_EN_BUTTON();
-	_delay_ms(LCD_INIT_LONG);
 
 	/*
 	 * - display on/off control instruction 
 	 */
-	LCD_PORT = 0x08;
+	LCD_PORT = LCD_CMD_DISPLAY_OFF;
 	LCD_PUSH_EN_BUTTON();
-	_delay_ms(LCD_INIT_LONG);
 	
 	/*
 	 * - clear display
 	 */
-	LCD_PORT = 0x01;
+	LCD_PORT = LCD_CMD_CLEAR_LCD;
        	LCD_PUSH_EN_BUTTON();
 	_delay_ms(LCD_INIT_LONG);
 
@@ -124,7 +122,6 @@ lcd_setup_display(void)
 	 */
 	LCD_PORT = 0x06;
 	LCD_PUSH_EN_BUTTON();
-	_delay_ms(LCD_INIT_LONG);
 
 	// ------ init done ------
 
@@ -155,7 +152,6 @@ lcd_setup_display(void)
 }
 
 
-
 /*
  * ->  reset lcd  
  */
@@ -178,11 +174,11 @@ lcd_reset_lcd()
 
 	LCD_PORT = 0x30;
 	LCD_PUSH_EN_BUTTON();
-	_delay_us(LCD_INIT_SHORT); // normal < 200us
+	_delay_us(LCD_ENABLE_PAUSE_DOUBLE); // +200us
 
 	LCD_PORT = 0x30;
 	LCD_PUSH_EN_BUTTON();
-	_delay_us(LCD_INIT_SHORT); // normal < 200us 
+	_delay_us(LCD_ENABLE_PAUSE_DOUBLE); // +200us
 
 	// now the hd44780 is ready to receive the first normal function set
 
@@ -200,35 +196,112 @@ lcd_reset_lcd()
 
 
 
-
 /*
  * ----------- functions to send commands to the LCD ---------
  */
 
 /*
- * -> send a command to the lcd
+ *  -> set cursor to position
  */
-void 
-lcd_send_command(unsigned char cmd) 
+void lcd_set_cursor(unsigned char x, lcd_lines_t line)
 {
-
-/*
- * SEND COMMAND FOR AVR
- */
-#if CONTROLLER_FAMILY == __AVR__
-	// fill_me
+    unsigned char command;
+ 
+    switch(line) {
+    case LCD_LINE_1:    
+	    command = LCD_CMD_DDRAM_ADDR + LCD_ADDR_LINE1 + x;
+	    break;
+	    
+    case LCD_LINE_2:    
+	    command = LCD_CMD_DDRAM_ADDR + LCD_ADDR_LINE2 + x;
+            break;
+	    
+    case LCD_LINE_3:    
+            command = LCD_CMD_DDRAM_ADDR + LCD_ADDR_LINE3 + x;
+            break;
+	    
+    case LCD_LINE_4:    
+            command = LCD_CMD_DDRAM_ADDR + LCD_ADDR_LINE4 + x;
+            break;
+	    
+    default:
+	    command = LCD_CMD_DDRAM_ADDR + LCD_ADDR_LINE1 + x;                              
+#if LCD_ERROR == __ON__
+		lcd_errno = LCD_SET_CURSOR_DEFAULT;
 #endif
-	
-
-/*
- * SEND COMMAND FOR ARM-CORTEX-M3
- */
-#if CONTROLLER_FAMILY == __ARM__
-	// fill me
-#endif  // ARM
-
+    }
+    
+    LCD_SET_RS_TO_COMMAND();
+    LCD_PORT = command;
+    LCD_PUSH_EN_BUTTON();
 }
 
+
+/*
+ *  -> clear display
+ */
+void lcd_clear_display()
+{  
+    LCD_SET_RS_TO_COMMAND();
+    LCD_PORT = LCD_CMD_CLEAR_LCD;
+    LCD_PUSH_EN_BUTTON();
+    _delay_ms(LCD_INIT_LONG);
+}
+
+
+/*
+ *  -> set cursor to home position
+ */
+void lcd_set_cursor_to_home_pos()
+{  
+    LCD_SET_RS_TO_COMMAND();
+    LCD_PORT = LCD_CMD_CURSOR_HOME;
+    LCD_PUSH_EN_BUTTON();
+}
+
+
+/*
+ *  -> turn the display off
+ */
+void lcd_set_display_off()
+{  
+    LCD_SET_RS_TO_COMMAND();
+    LCD_PORT = LCD_CMD_DISPLAY_OFF;
+    LCD_PUSH_EN_BUTTON();
+}
+
+
+/*
+ *  -> turn the display on
+ */
+void lcd_set_display_on()
+{  
+    LCD_SET_RS_TO_COMMAND();
+    LCD_PORT = LCD_CMD_DISPLAY_ON;
+    LCD_PUSH_EN_BUTTON();
+}
+
+
+/*
+ *  -> set cursor off
+ */
+void lcd_set_cursor_off()
+{  
+    LCD_SET_RS_TO_COMMAND();
+    LCD_PORT = LCD_CMD_CURSOR_OFF;
+    LCD_PUSH_EN_BUTTON();
+}
+
+
+/*
+ *  -> set cursor off
+ */
+void lcd_set_cursor_on()
+{  
+    LCD_SET_RS_TO_COMMAND();
+    LCD_PORT = LCD_CMD_DISPLAY_ON;
+    LCD_PUSH_EN_BUTTON();
+}
 
 
 /*
@@ -239,19 +312,53 @@ lcd_send_command(unsigned char cmd)
  * -> send a character to the lcd
  */
 void 
-lcd_send_character(unsigned char cmd) 
+lcd_send_character(unsigned char data) 
 {
 
 /*
  * SEND CHARACTER FOR AVR
  */
 #if CONTROLLER_FAMILY == __AVR__
-	// fill_me
+	LCD_SET_RS_TO_CHARACTER();
+	LCD_PORT = data;
+	LCD_PUSH_EN_BUTTON();
 #endif
 	
 
 /*
  * SEND CHARACTER FOR ARM-CORTEX-M3
+ */
+#if CONTROLLER_FAMILY == __ARM__
+	// fill me
+#endif  // ARM
+
+}
+
+
+/*
+ * -> send a string to the lcd
+ */
+void 
+lcd_send_string(const unsigned char *data) 
+{
+	unsigned char row_count = 0x00;
+/*
+ * SEND STRING FOR AVR
+ */
+#if CONTROLLER_FAMILY == __AVR__
+	while((*data != '\0') && (row_count < LCD_NUMBER_OF_ROWS)) {
+			lcd_send_character(*data++);
+			row_count++;
+	}
+#if LCD_ERROR == __ON__
+	if (*data != '\0') 
+		lcd_errno = LCD_LINE_OVERFLOW;
+#endif
+
+#endif
+	
+/*
+ * SEND STRING FOR ARM-CORTEX-M3
  */
 #if CONTROLLER_FAMILY == __ARM__
 	// fill me
