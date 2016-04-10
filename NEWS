@@ -1,32 +1,6 @@
 # THE LATEST NEWS
 
-2014-08-05 -> add projects dir with skeletons for my 3 related projects 
-	      -> my_ext_ctrl_modul (external i2c display ...)
-	      -> my_fan_ctrl_modul (fan ctrl modul for my pc case ...)
-	      -> my_usb_i2c_shifter (usb to i2c converter ...)
-
-2014-08-04 -> implementation of a small lib for interfacing a lcd ... tested with atmeag32
-              Note: 8bit interface ... within the next ceckins i will add a shift register for it
-
-	      implemenation of libavrserial works fine ... testet with atmega168 
-	      
-	      also there were a lot of cleanups and small fixes
-
-	      updated NOTES and all the other files 
-
-2014-07-10 -> first implementation of libavrserial content ... now its possible
-	      to send bytes and chars ... also ready is possible
-	      also there were a lot of cleanups and small fixes
-	      Note: the code in src will be used for avr and arm devices ... so i 
-	      	    will only have one codebase@home with content of both and then
-		    merge it in avr_sdk (see https://github.com/tjohann/avr_sdk) and 
-		    arm_sdk (see https://github.com/tjohann/arm_cortex_sdk)
-
-2014-06-23 -> a lot of updates due dependency handling and env setup
-
-2014-06-11 -> add libavrhelper
-
-2014-05-?? -> add template
+2016-04-10 -> start to cleanup 
 
 2014-04-29 -> initial setup 
 
