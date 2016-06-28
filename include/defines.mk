@@ -1,14 +1,14 @@
 # common defines
 
 # add global include dir
-INCLUDEDIR = ./includes 
+INCLUDEDIR = ./includes
 INCLUDEDIR += -I${AVR_HOME}/include
 
 # add global lib dir
-LIBDIR = ./lib 
+LIBDIR = ./lib
 LIBDIR += -L${AVR_HOME}/lib
 
-# install dirs 
+# install dirs
 INSTALL_BIN = $(AVR_HOME)/bin
 INSTALL_LIB = $(AVR_HOME)/lib
 INSTALL_INCL = $(AVR_HOME)/include
@@ -17,12 +17,12 @@ INSTALL_ETC = $(AVR_HOME)/etc
 INSTALL_SHARE = $(AVR_HOME)/share
 
 # common cflags
-CFLAGS = -ffunction-sections -fdata-sections 
+CFLAGS = -ffunction-sections -fdata-sections
 LDFLAGS = -Wl,--relax,--gc-sections -Wl,-Map,$(TARGET).map
 
 # common stuff
 #WARN = -Wall -Wstrict-prototypes
-WARN = -Wall 
+WARN = -Wall
 DEBUG = -g -ggdb
 CSTD = gnu99
 

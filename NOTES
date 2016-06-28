@@ -2,7 +2,7 @@ Notes:
 
 The content of this repo reflects my private working with avr devices. As an Slackware user you can download and install compiler and libc from www.slackbuilds.org. I`m the maintainer of those packages. Feel free to ask for questions regarding it.
 
-My actual hw are a atmega168pa and a atmega32 which are a quite nice devices. For programming i use an old stk500 wich is connected with my pc via serial cable, but it also works fine with an serial<->usb cable. The libs in src reflect something like building blocks where i create some small hw components to be used in future projects. Within the next checkins you can find the schematics in schematics. 
+My actual hw are a atmega168pa and a atmega32 which are a quite nice devices. For programming i use an old stk500 wich is connected with my pc via serial cable, but it also works fine with an serial<->usb cable. The libs in src reflect something like building blocks where i create some small hw components to be used in future projects. Within the next checkins you can find the schematics in schematics.
 
 If you need some inspiration why to use bare metal devices instead of arduino, take a look at this really cool book -> http://makezine.com/2014/03/06/new-avr-programming-book-from-make/ ... Of course i have a copy of it on my desk :-)
 
@@ -10,7 +10,7 @@ I also started playing with arm devices and also there's a book the starting poi
 
 My idea for using the content of this repo is to use git to handle variants -> branches for every projects which needs changes within the config files. The master branch is the basic for all. It includes 2 different configs which reflect different hw. First an breadboard with an atmega168 and only simple hw parts connected to it and a second with a pcb and more complex hw. The hw configuration will be done throught the env files (my_m168pa_env and my_m32_env). If the hw needed more configuration like an display, then you find another config file in include(/avr_defines_display.h). Thats the place to change hw specific parts (think of the DDRAM-addresses of display lines). If you need changes within it, then create a branch and change the content. Merging of master-branch changes will be the quite easy because you only changed the config. At the moment i dont need such changes so everthing is on the master branch.
 
-My projects are in the dir projects. See the README file there for more info! 
+My projects are in the dir projects. See the README file there for more info!
 
 Cheers
-  Thorsten 
+  Thorsten

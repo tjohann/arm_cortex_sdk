@@ -5,6 +5,6 @@
 # set arm cortex home
 export ARM_CORTEX_HOME=${HOME}/arm_cortex_sdk
 
-# extend PATH 
+# extend PATH
 export PATH=${ARM_CORTEX_HOME}/bin::$PATH
 

@@ -1,6 +1,6 @@
 /*
   avr/arm_compile_macros - some common compile macros for avr/arm usage
- 
+
   Copyright (C) 2014 Thorsten Johannvorderbrueggen <thorsten.johannvorderbrueggen@t-online.de>
 
   This library is free software; you can redistribute it and/or
@@ -19,7 +19,7 @@
 */
 
 #ifndef _ARM_COMPILE_MACROS_H_
-#define _ARM_COMPILE_MACROS_H_   
+#define _ARM_COMPILE_MACROS_H_
 
 
 /*
@@ -28,7 +28,7 @@
 
 
 /*
- * check macros and define reasonable defaults 
+ * check macros and define reasonable defaults
  */
 #ifndef CONTROLLER_FAMILY
 #define CONTROLLER_FAMILY  __ARM__
@@ -37,7 +37,7 @@
 
 
 /*
- * defines for port definitions -> see libavrcyclon 
+ * defines for port definitions -> see libavrcyclon
  */
 #ifndef __PORT_A__
 #define __PORT_A__ 1
@@ -56,7 +56,7 @@
 #endif
 
 /*
- * defines for COMMUNICATION_PATH 
+ * defines for COMMUNICATION_PATH
  */
 #ifndef __SERIAL__
 #define __SERIAL__ 1

@@ -1,5 +1,5 @@
-MODULES = 
-FLASH = 
+MODULES =
+FLASH =
 
 all::
 	@echo " "
@@ -11,7 +11,7 @@ clean::
 	rm -f *~ *.o .*~
 	for dir in $(MODULES); do (cd $$dir && $(MAKE) $@); done
 
-install:: 
+install::
 	@echo " "
 	@echo "--> Nothing to install "
 	@echo " "
