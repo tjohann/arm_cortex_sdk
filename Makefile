@@ -6,7 +6,7 @@ ifeq "${ARM_CORTEX_HOME}" ""
     $(error error: please source arm_cortex_env first!)
 endif
 
-MODULES = Documenation include lib schemantics pics scripts
+MODULES = Documentation include lib schemantics pics scripts
 MODULES += src projects
 
 all::
