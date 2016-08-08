@@ -6,7 +6,7 @@ ifeq "${ARM_CORTEX_HOME}" ""
     $(error error: please source arm_cortex_env first!)
 endif
 
-MODULES = Documenation include lib schemantics pics
+MODULES = Documenation include lib schemantics pics scripts
 MODULES += src projects
 
 all::
@@ -22,11 +22,3 @@ clean::
 	for dir in $(MODULES); do (cd $$dir && $(MAKE) $@); done
 
 distclean: clean
-
-flash::
-	@echo "+-----------------------------------------------+"
-	@echo "|                                               |"
-	@echo "|            Flashing template                  |"
-	@echo "|                                               |"
-	@echo "+-----------------------------------------------+"
-	for dir in $(MODULES); do (cd $$dir && $(MAKE) $@); done

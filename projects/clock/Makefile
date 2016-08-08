@@ -9,7 +9,6 @@ all:
 .PHONY: clean
 clean:
 	rm -f *~
-	rm -f *~
 	for dir in $(MODULES); do (cd $$dir && $(MAKE) $@); done
 
 distclean: clean
