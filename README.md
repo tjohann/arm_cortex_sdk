@@ -15,7 +15,7 @@ Supported devices
 
 At the moment I use Olimex SAM3-P256/H256 (https://www.olimex.com/Products/ARM/Atmel/SAM3-P256/ and https://www.olimex.com/Products/ARM/Atmel/SAM3-H256/) and Olimex LPC-P1343 (https://www.olimex.com/Products/ARM/NXP/LPC-P1343/).
 
-Both devices need a libchip (processor specific parts -> here the same for both) and a libboard (board specific parts). I provide a small script wich downloads the already compiled librarys from sourceforge. If you want to build it on your own, checkout my repository (tbd.) which is based on the Atmel and Olimex zip files (tbd download links).
+Both devices need a libchip (processor specific parts -> here the same for both) and a libboard (board specific parts). I provide a small script wich downloads the already compiled librarys from sourceforge. If you want to build it on your own, checkout my repository (https://github.com/tjohann/sam3_p256_libboard and https://github.com/tjohann/lpc_p1343_libboard) which is based on the Atmel/NXP/Olimex zip files.
 
 
 Setup dev environment
