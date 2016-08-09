@@ -12,7 +12,7 @@ export ARM_CORTEX_HOME=${HOME}/arm_cortex_sdk
 export ARM_CORTEX_BIN_HOME=/opt/arm_cortex_sdk
 
 # extend PATH
-export PATH=${ARM_CORTEX_HOME}/toolchain:$PATH
+export PATH=${ARM_CORTEX_BIN_HOME}/toolchain:$PATH
 
 echo "Setup env for host \"${MY_HOST_ARCH}\" with root dir \"${ARM_CORTEX_HOME}\" and binary folder \"${ARM_CORTEX_BIN_HOME}\""
 
