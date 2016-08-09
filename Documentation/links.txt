@@ -3,5 +3,5 @@
 #
 
 
-# thos 
+# thos
 https://github.com/a-rubini/thos

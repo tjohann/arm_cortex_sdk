@@ -1,1 +1,10 @@
-# TODO
+#
+# TODO with date and progress
+#
+
+#
+# -------------- 2016-08-09 ----------------------------------------------------
+#
+
+- add clean of libboard and libchip below distclean
+- get rid of linaro toolchain -> build own with crosstool-ng
