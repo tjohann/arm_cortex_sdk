@@ -161,13 +161,13 @@ else
 	echo "ERROR -> could not mkdir -p $ARM_CORTEX_BIN_HOME" >&2
 	my_exit
     fi
-    
+
     sudo chown $USER:users $ARM_CORTEX_BIN_HOME
     if [ $? -ne 0 ] ; then
 	echo "ERROR -> could not chown $USER:users $ARM_CORTEX_BIN_HOME" >&2
 	my_exit
     fi
-    
+
     sudo chmod 775 $ARM_CORTEX_BIN_HOME
     if [ $? -ne 0 ] ; then
 	echo "ERROR -> could not chmod 775 $ARM_CORTEX_BIN_HOME" >&2

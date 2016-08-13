@@ -161,7 +161,7 @@ fi
 create_download_string()
 {
    TOOLCHAIN_DOWNLOAD_STRING="${TOOLCHAIN_STRING}/${TOOLCHAIN_TARBALL}"
-  
+
    echo "INFO: set toolchain download string to ${TOOLCHAIN_DOWNLOAD_STRING}"
 }
 

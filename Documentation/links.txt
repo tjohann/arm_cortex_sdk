@@ -2,6 +2,10 @@
 # some useful links
 #
 
-
 # thos
 https://github.com/a-rubini/thos
+
+# CMSIS
+https://github.com/ARM-software/CMSIS
+https://github.com/ARM-software/CMSIS_5
+http://www.keil.com/pack/doc/CMSIS/General/html/index.html
