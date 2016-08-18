@@ -1,3 +1,4 @@
 # ignore some stuff
 libboard_sam3s_ek_gcc*
 libchip_sam3s4_gcc*
+libmemories_sam3s_gcc*
